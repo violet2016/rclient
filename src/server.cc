@@ -8,7 +8,7 @@
 #include <cstring>
 
 #include "rserver.hh"
-
+void RunTestServer(const std::string &address, const std::string &port);
 int main(int argc, char **argv) {
     RServer *server = nullptr;
     RServerLog *log = nullptr;
@@ -59,6 +59,13 @@ int main(int argc, char **argv) {
                          "Server start in PL4K debuging mode, listening address is %s, port is %s",
                          argv[2], argv[3]);
                 server->initServer(argv[2], argv[3]);
+            } else if (mode.compare("100") == 0) {
+                log = new RServerLog(RServerWorkingMode::PL4KDEBUG, std::string(""));
+                server = new RServer(RServerWorkingMode::PL4KDEBUG, log);
+                log->log(RServerLogLevel::LOGS,
+                         "Server start in test mode, listening address is %s, port is %s",
+                         argv[2], argv[3]);
+                RunTestServer(argv[2], argv[3]);
             } else {
                 log = new RServerLog(RServerWorkingMode::CONTAINER, std::string(""));
                 server = new RServer(RServerWorkingMode::CONTAINER, log);

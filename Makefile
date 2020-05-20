@@ -63,7 +63,7 @@ override LDFLAGS += $(PROTOBUF_LDFLAGS) $(GPRC_LDFLAGS) \
            -ldl
 
 
-COMMON_OBJS = src/rserver.o src/rcall.o src/rtypeconverter.o src/rutils.o src/plcontainer.pb.o src/plcontainer.grpc.pb.o
+COMMON_OBJS = src/rserver.o src/rcall.o src/rtypeconverter.o src/rutils.o src/plcontainer.pb.o src/plcontainer.grpc.pb.o src/helloworld.grpc.pb.o src/helloworld.pb.o src/greeter_server.o
 ALL_OBJS = src/server.o $(COMMON_OBJS)
 
 .PHONY: default
@@ -85,7 +85,7 @@ librcall.so: $(COMMON_OBJS)
 	cp librcall.so bin
 
 .PHONY: all
-all:  $(ALL_OBJS) librcall.so
+all:  $(ALL_OBJS) librcall.so 
 	$(CXX) -o $(SERVER) $^ $(LDFLAGS) $(CXXFLAGS)
 	cp $(SERVER) bin
 
